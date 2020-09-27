@@ -65,7 +65,7 @@ for gene in DEGs:
                 strand = split_line[6]
                 dna_seq_of_DEGs = chromosome_dict[chromosome][int(start):int(end)]
                 # To find the potential regulatory sequences of DEGs,
-                # I extracted 400 base pairs from upstream and 100 bases from downstream region relative to the translation initiation codon (ATG) and differetiate the positive and negative strands with if statement.
+                # I extracted 400 base pairs from upstream and 100 bases from downstream region relative to the translation initiation codon (ATG) and differentiate the positive and negative strands with if statement.
                 if strand == "+":
                     location_ATG = dna_seq_of_DEGs.find("ATG")
                     downstream_flanking = start  + location_ATG + 100
