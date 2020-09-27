@@ -1,5 +1,17 @@
-# I converted the file genes_csv to a data frame to make a list of differentially expressed genes and extract the conditions
+# Emine Ozsahin 
+# December 2019
+# Packages
 import pandas as pd
+import numpy as np
+from sklearn.feature_selection import VarianceThreshold
+from sklearn.ensemble import ExtraTreesClassifier
+from sklearn.manifold import TSNE
+from matplotlib import pyplot as plt
+import seaborn as sns
+from sklearn.model_selection import cross_val_score, StratifiedKFold
+import shap
+
+# I converted the file genes_csv to a data frame to make a list of differentially expressed genes and extract the conditions
 # csv file to data frame
 df_csv = pd.read_csv("genes.csv", header=0, index_col=0, quotechar='"', sep=",", na_values=["nan", "-", ".", " ", ""], delimiter=',')
 # print(df_csv.isnull().sum()) ## There are missing values, so I filled them with NA because later I need this to exclude missing values from my list
@@ -139,14 +151,7 @@ for names, kmr_dict in regulatory_sequences.items():
 
 # For machine learning part kmer occurances were labeled with the condition and expression levels.
 # Classification made based on kmers occurances.
-import numpy as np
-from sklearn.feature_selection import VarianceThreshold
-from sklearn.ensemble import ExtraTreesClassifier
-from sklearn.manifold import TSNE
-from matplotlib import pyplot as plt
-import seaborn as sns
-from sklearn.model_selection import cross_val_score, StratifiedKFold
-import shap
+
 
 # This function is taken from stackoverflow: https://stackoverflow.com/questions/18703136/proximity-matrix-in-sklearn-ensemble-randomforestclassifier.
 def proximityMatrix(model, X, normalize=True):
